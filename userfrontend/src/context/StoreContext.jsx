@@ -1,103 +1,4 @@
-/*import { createContext, useState,useEffect } from "react";
-import axios from 'axios'
 
-export const StoreContext = createContext();
-
-const StoreContextProvider = (props) => {
-  const [cartitems, setcartitems] = useState({});
-  const [food_list, setFoodList] = useState([]);
-
-  const [token, setToken] = useState("");  // ✅ moved inside the component
-  const url = "http://localhost:4000";     // ✅ keep this outside or inside — both are fine
-  const fetchFoodList = async () => {
-  const response = await axios.get(url + '/api/food/list');
-  setFoodList(response.data.data);
-};
-
-useEffect(() => {
-  async function loadData() {
-    await fetchFoodList();
-    if (localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
-      await loadCartData(localStorage.getItem("token"))
-    }
-  }
-  loadData();
-}, []);
-const loadCartData = async (token) => {
-  const response = await axios.get(url + "/api/cart/get", {
-    headers: { token },
-  });
-  setCartItems(response.data.cartData);
-};
-
-
- 
-
-
-  const addtocart = async(itemid) => {
-    if (!cartitems[itemid]) 
-      setcartitems({ ...cartitems, [itemid]: 1 });
-     else 
-      setcartitems({ ...cartitems, [itemid]: cartitems[itemid] + 1 });
-    
-    if (token) {
-  try {
-    await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
- 
-
-  };
-
-  const removefromcart = async(itemid) => {
-    setcartitems({ ...cartitems, [itemid]: cartitems[itemid] - 1 });
-    if (token) {
-  try {
-    await axios.delete(`${url}/api/cart/remove?itemId=${itemId}`, {
-      headers: { token }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-  };
-
-  const gettotalcartamount = async() => {
-    let total = 0;
-    for (let item in cartitems) {
-      if (cartitems[item] > 0) {
-        let iteminfo = food_list.find((food) => food._id === item);
-        total += iteminfo.price * cartitems[item];
-      }
-    }
-    return total;
-  };
-
-  const contextvalues = {
-    food_list,
-    cartitems,
-    setcartitems,
-    addtocart,
-    removefromcart,
-    gettotalcartamount,
-    url,
-    token,
-    setToken,
-  };
-
-  return (
-    <StoreContext.Provider value={contextvalues}>
-      {props.children}
-    </StoreContext.Provider>
-  );
-};
-
-export default StoreContextProvider;*/
 
 
 import { createContext, useState, useEffect } from "react";
@@ -109,7 +10,7 @@ const StoreContextProvider = (props) => {
   const [cartitems, setcartitems] = useState({});
   const [food_list, setFoodList] = useState([]);
   const [token, setToken] = useState("");
-  const url = "http://localhost:4000";
+  const url = "https://foodprep-lm5n.onrender.com";
 
   const fetchFoodList = async () => {
     const response = await axios.get(url + '/api/food/list');
